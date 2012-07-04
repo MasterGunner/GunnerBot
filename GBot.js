@@ -38,24 +38,28 @@ setTimeout(function() {
 		irc.send('PONG :' + info[1]);
 	});
 	//Response to name being called
-	/*irc.on(/ PRIVMSG (.*) :.*GunnerBot/i, function(info) {
+	irc.on(/ PRIVMSG (.*) :.*GunnerBot/i, function(info) {
 		if (Math.floor(Math.random()*3) > 0) { irc.say(info[1], bot.getInsult()); }
 		else { irc.say(info[1], bot.getComplement()); }
-	});*/
+	});
 	//List available commands
-	irc.on(/ PRIVMSG (.*) :!Functions/i, function(info) {
-		irc.say(info[1], "Available Commands: !Echo, !PM, !Phrase");
+	irc.on(/ PRIVMSG (.*) :;Help/i, function(info) {
+		irc.say(info[1], "Available Commands: ;Echo, ;PM, ;Phrase, ;Source");
+	});
+	//Link to GitHub Source
+	irc.on(/ PRIVMSG (.*) :;Source/i, function(info) {
+		irc.say(info[1], "https://github.com/MasterGunner/GunnerBot");
 	});
 	//Echo whatever was said in the same channel the command was given on
-	irc.on(/ PRIVMSG (.*) :!Echo (.*)/i, function(info) {
+	irc.on(/ PRIVMSG (.*) :;Echo (.*)/i, function(info) {
 		irc.say(info[1], info[2]);
 	});
 	//Send message to designated channel
-	irc.on(/ PRIVMSG .* :!PM (.*) (.*)/i, function(info) {
+	irc.on(/ PRIVMSG .* :;PM (.*) (.*)/i, function(info) {
 		irc.say(info[1], info[2]);
 	});
 	//Say a random phrase
-	irc.on(/ PRIVMSG (.*) :!Phrase ?(.*)/i, function(info) {
+	irc.on(/ PRIVMSG (.*) :;Phrase ?(.*)/i, function(info) {
 		if (info[2]) { info[1] = info[2] } //if channel is given, set it as the response channel
 		bot.sayPhrase(info[1]);
 	});
@@ -72,15 +76,15 @@ setTimeout(function() {
 		irc.say(info[2], '' + info[1] + ' rolled: ' + total);
 	});
 	//Reload phrase list
-	irc.on(/:MistressGunner!.* PRIVMSG (.*) :!Reload/i, function(info) {
+	irc.on(/:MistressGunner!.* PRIVMSG (.*) :;Reload/i, function(info) {
 		bot.loadList();
 	});
 	//Join designated channel
-	irc.on(/:MistressGunner!.* PRIVMSG (.*) :!Join (.*)/i, function(info) {
+	irc.on(/:MistressGunner!.* PRIVMSG (.*) :;Join (.*)/i, function(info) {
 		irc.send('JOIN ' + info[2]);
 	});
 	//Leave channel
-	irc.on(/:MistressGunner!.* PRIVMSG (.*) :!Part/i, function(info) {
+	irc.on(/:MistressGunner!.* PRIVMSG (.*) :;Part/i, function(info) {
 		irc.send('PART ' + info[1]);
 	});
 }, 500);
