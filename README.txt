@@ -1,1 +1,2 @@
-Gunner's Node.JS IRC Bot.
+GBot - Node.JS IRC Bot.
+RBot - Ruby IRC Bot
