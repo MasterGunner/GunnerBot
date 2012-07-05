@@ -27,6 +27,10 @@ class IRC
 		@@s.send "#{message}\r\n", 0
 		puts "SENT - #{message}"
 	end
+	def say (channel, message)
+		@@s.send "PRIVMSG #{channel} :#{data}\r\n"
+		puts "SENT(#{channel}) - #{data}"
+	end
 end
 
 SERVER = "irc.desertbus.org"
