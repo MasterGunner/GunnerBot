@@ -133,3 +133,42 @@
 22:05:48: RECV - :irc.desertbus.org 366 RubyGunner #desertbus :End of /NAMES list.
 22:05:48: RECV - :ChanServ!services@desertbus.org NOTICE RubyGunner :[#desertbus] To register your nickname, type /ns register PASSWORD EMAIL. Then check your e-mail for your confirmation code.
 22:05:56: SENT(#DesertBus) - huh
+23:23:32: Connecting...
+23:23:32: SENT - NICK RubyGunner
+23:23:32: SENT - USER RubyGunner 8 *:Node.js IRC bot
+23:23:35: SENT - JOIN #desertbus
+23:23:35: In Thread
+23:23:35: RECV - :irc.desertbus.org NOTICE AUTH :*** Looking up your hostname...
+23:23:35: RECV - :irc.desertbus.org NOTICE AUTH :*** Checking ident...
+23:23:35: RECV - :irc.desertbus.org NOTICE AUTH :*** Found your hostname
+23:23:35: RECV - :irc.desertbus.org NOTICE AUTH :*** No ident response; username prefixed with ~
+23:23:35: RECV - PING :C08F019F
+23:23:35: SENT - PONG :C08F019F
+23:23:35: RECV - :irc.desertbus.org 451 JOIN :You have not registered
+23:23:35: RECV - :irc.desertbus.org 001 RubyGunner :Welcome to the DesertBusNet IRC Network RubyGunner!~RubyGunne@mctnnbsa59w-142134184164.dhcp-dynamic.FibreOP.nb.bellaliant.net
+23:23:35: RECV - :irc.desertbus.org 002 RubyGunner :Your host is irc.desertbus.org, running version Unreal3.2.8.1
+23:23:35: RECV - :irc.desertbus.org 003 RubyGunner :This server was created Tue Nov 1 2011 at 02:54:27 PDT
+23:23:35: RECV - :irc.desertbus.org 004 RubyGunner irc.desertbus.org CR1.8.03-Unreal3.2.8.1 iowghraAsORTVSxNCWqBzvdHtGp lvhopsmntikrRcaqOALQbSeIKVfMCuzNTGj
+23:23:35: RECV - :irc.desertbus.org 005 RubyGunner UHNAMES NAMESX SAFELIST HCN MAXCHANNELS=5 CHANLIMIT=#:5 MAXLIST=b:60,e:60,I:60 NICKLEN=30 CHANNELLEN=32 TOPICLEN=307 KICKLEN=307 AWAYLEN=307 MAXTARGETS=20 :are supported by this server
+23:23:35: RECV - :irc.desertbus.org 005 RubyGunner WALLCHOPS WATCH=128 WATCHOPTS=A SILENCE=15 MODES=12 CHANTYPES=# PREFIX=(qaohv)~&@%+ CHANMODES=beI,kfL,lj,psmntirRcOAQKVCuzNSMTG NETWORK=DesertBusNet CASEMAPPING=ascii EXTBAN=~,cqnr ELIST=MNUCT STATUSMSG=~&@%+ :are supported by this server
+23:23:35: RECV - :irc.desertbus.org 005 RubyGunner EXCEPTS INVEX CMDS=KNOCK,MAP,DCCALLOW,USERIP :are supported by this server
+23:23:35: RECV - :irc.desertbus.org 251 RubyGunner :There are 8 users and 77 invisible on 2 servers
+23:23:35: RECV - :irc.desertbus.org 252 RubyGunner 9 :operator(s) online
+23:23:35: RECV - :irc.desertbus.org 254 RubyGunner 4 :channels formed
+23:23:35: RECV - :irc.desertbus.org 255 RubyGunner :I have 77 clients and 1 servers
+23:23:35: RECV - :irc.desertbus.org 265 RubyGunner :Current Local Users: 77  Max: 1757
+23:23:35: RECV - :irc.desertbus.org 266 RubyGunner :Current Global Users: 85  Max: 1693
+23:23:35: RECV - :irc.desertbus.org 375 RubyGunner :- irc.desertbus.org Message of the Day - 
+23:23:35: RECV - :irc.desertbus.org 372 RubyGunner :- 7/5/2011 16:15
+23:23:35: RECV - :irc.desertbus.org 372 RubyGunner :- THIS IS THE MOTD
+23:23:35: RECV - :irc.desertbus.org 376 RubyGunner :End of /MOTD command.
+23:23:35: RECV - :RubyGunner MODE RubyGunner :+iwx
+23:23:35: RECV - :RubyGunner!~RubyGunne@dbus-B373D97.dhcp-dynamic.fibreop.nb.bellaliant.net JOIN :#desertbus
+23:23:35: RECV - :irc.desertbus.org 332 RubyGunner #desertbus :Desert Bus 6: Ashton's Sensual Chocolate starts November 16th | DB5 footage: http://www.youtube.com/user/DesertBusArchive http://fugiman.com/De5ertBus.torrent | Do not offer suggestions for BidBot
+23:23:35: RECV - :irc.desertbus.org 333 RubyGunner #desertbus AeroCmdr 1341475303
+23:23:35: RECV - :irc.desertbus.org 353 RubyGunner = #desertbus :RubyGunner TheBox LadySephiroth Moatman stephonee Twostepz cyphase Aeryn BigDrig aonomus ElementalAlchemist Anubis169 Sketchy Dicey Larscis KNishimura XelaReko UsagiRobotto Caitiri DesertBum Petrick mowinckel SAJ MistressGunner Trahsi sektor88 BrainStew mint Sanityis0verrated NewClassic @AeroCmdr DigiDigi JerryArr Juliamon Handofpwn mwheeler MoeFwacky gcninja Dragoon|Sleep Quest MoronBot TsukiakariUsagi ~Ashton 
+23:23:35: RECV - :irc.desertbus.org 353 RubyGunner = #desertbus :PongoSapiens TomBrend Guest2848 Guest17765 Defacer607 Tyranic-Moron Chamelaeon Emily RvLeshrac malfunct TinoDidriksen UnsafeBot Koios Sokar RoBoBo BlehBot ThriKreen Kanitaria danemcrae BillTheCat Fogelholk Sedorox Xylophobian tueidj J Styglian Moddington ~Fugiman Homoglyph mbaxter dave_random Inferno Chton bloodraven 
+23:23:35: RECV - :irc.desertbus.org 366 RubyGunner #desertbus :End of /NAMES list.
+23:23:35: RECV - :ChanServ!services@desertbus.org NOTICE RubyGunner :[#desertbus] To register your nickname, type /ns register PASSWORD EMAIL. Then check your e-mail for your confirmation code.
+23:23:39: SENT(#DesertBus) - boop
+23:23:41: RECV - :UsagiRobotto!~Emily@dbus-73594771.ph.ph.cox.net PRIVMSG #desertbus :[Auto] Boop! http://bit.ly/zA2bUY
