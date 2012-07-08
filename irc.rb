@@ -1,3 +1,8 @@
+#!/usr/bin/env ruby
+=begin
+	This class extends the TCP socket, allowing one to connect to an IRC server, 
+	and send properly formatted commands to it.
+=end
 require 'socket'
 
 class IRC < TCPSocket
