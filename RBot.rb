@@ -23,11 +23,14 @@ def botRead
 end
 #Write to IRC Socket
 def botWrite
+	@chan = "#DesertBus"
 	while (line = gets.chomp)
 		if /^QUIT/.match(line)
 			break
+		elsif /^CHAN (.+)/.match(line)
+			@chan = $1
 		end
-		@iBot.say("#DesertBus", "#{line}")
+		@iBot.say("#{@chan}", "#{line}")
 	end
 end
 
