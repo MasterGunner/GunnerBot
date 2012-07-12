@@ -15,18 +15,23 @@ class Functions
 			
 			#List available commands
 			elsif / PRIVMSG (.*) :;Help/i.match(line)
+				Logger.log "RECV - " + line
 				iBot.say($1, "Available Commands: #{@@commands}")
 			#Link to bot source code
 			elsif / PRIVMSG (.*) :;Source/i.match(line)
+				Logger.log "RECV - " + line
 				iBot.say($1, "https://github.com/MasterGunner/GunnerBot")
 			#Echo message back into channel
 			elsif / PRIVMSG .* :;PM (.*) (.*)/i.match(line)
+				Logger.log "RECV - " + line
 				iBot.say($1, "#{$2}")
 			#Send message to designated channel
 			elsif / PRIVMSG (.*) :;Echo (.*)/i.match(line)
+				Logger.log "RECV - " + line
 				iBot.say($1, "#{$2}")
 			#Dice Roller
 			elsif /:(.*)!.* PRIVMSG (.*) :;Roll (\d+)d(\d+) ?\+? ?(\d*)/i.match(line)
+					Logger.log "RECV - " + line
 					total = 0
 					for i in 1..Integer($3)
 						total = total + Random.new.rand(1..Integer($4))
@@ -40,9 +45,11 @@ class Functions
 			
 			#Join designated channel
 			elsif /:MistressGunner!.* PRIVMSG .* :;Join (.*)/i.match(line)
+				Logger.log "RECV - " + line
 				iBot.send("JOIN #{$1}")
 			#Leave channel
 			elsif /:MistressGunner!.* PRIVMSG (.*) :;Part/i.match(line)
+				Logger.log "RECV - " + line
 				iBot.send("PART #{$1}")
 			end
 		rescue Exception => e
