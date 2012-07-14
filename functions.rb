@@ -8,7 +8,7 @@ class Functions
 	def Functions.listeners (iBot, line)
 		begin
 			#Ping/Pong response
-			if /^PING :(.+)$/i.match(line)
+			if /^PING :(.+)$/.match(line)
 				iBot.send ("PONG :" + $1)
 			
 			#####Public Commands#####
@@ -31,15 +31,19 @@ class Functions
 				iBot.say($1, "#{$2}")
 			#Dice Roller
 			elsif /:(.*)!.* PRIVMSG (.*) :;Roll (\d+)d(\d+) ?\+? ?(\d*)/i.match(line)
-					Logger.log "RECV - " + line
-					total = 0
-					for i in 1..Integer($3)
-						total = total + Random.new.rand(1..Integer($4))
+					if (Integer($3) > 0 && Integer($3) < 1001 && Integer($4) > 0 && Integer($4) < 1001)
+						Logger.log "RECV - " + line
+						total = 0
+						for i in 1..Integer($3)
+							total = total + Random.new.rand(1..Integer($4))
+						end
+						if(!$5.empty?)
+							total = total + (Integer($5)*Integer($3))
+						end
+						iBot.say($2, "#{$1} rolled: #{total}")
+					else
+						iBot.say($2, "#{1.chr}ACTION Slaps #{$1}#{1.chr}")
 					end
-					if(!$5.empty?)
-						total = total + (Integer($5)*Integer($3))
-					end
-					iBot.say($2, "#{$1} rolled: #{total}")
 			
 			#####Administrative Commands#####
 			

@@ -19,8 +19,8 @@ def botRead
 	while (line = @iBot.gets)
 		if /Gunner/i.match(line) || /(^| )MG($| )/i.match(line)
 			Logger.log "RECV - " + line
-			Functions.listeners(@iBot, line)
 		end
+		Thread.new{Functions.listeners(@iBot, line)}
 	end
 end
 #Write to IRC Socket
@@ -31,6 +31,8 @@ def botWrite
 			break
 		elsif /^CHAN (.+)/.match(line)
 			@chan = $1
+		elsif /^ACTION (.+)/.match(line)
+			@iBot.say("#{@chan}", "#{1.chr}ACTION #{$1}#{1.chr}")
 		else
 			@iBot.say("#{@chan}", "#{line}")
 		end

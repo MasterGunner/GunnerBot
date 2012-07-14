@@ -18,7 +18,9 @@ class IRC < TCPSocket
 	end
 	def send (message)
 		super "#{message}\r\n", 0
-		Logger.log "SENT - #{message}"
+		unless /^PONG/.match(message)
+			Logger.log "SENT - #{message}"
+		end
 	end
 	def say (channel, message)
 		super_send "PRIVMSG #{channel} :#{message}\r\n", 0
