@@ -65,7 +65,7 @@ class Functions
 		end
 	end
 	
-	def dieRoll(sides, mod)
+	def Functions.dieRoll(sides, mod)
 		total = Random.new.rand(1..Integer(sides))
 		if(!mod.empty?)
 			total = total + Integer(mod)
