@@ -4,7 +4,7 @@
 =end
 require_relative 'logger'
 class Functions
-	@@commands = [";Source", ";Echo", ";PM", ";Roll"]
+	@@commands = [";Source", ";Echo", ";PM", ";Roll", ";RollEach"]
 	def Functions.listeners (iBot, line)
 		begin
 			#Ping/Pong response
@@ -30,20 +30,23 @@ class Functions
 				Logger.log "RECV - " + line
 				iBot.say($1, "#{$2}")
 			#Dice Roller
-			elsif /:(.*)!.* PRIVMSG (.*) :;Roll (\d+)d(\d+) ?\+? ?(\d*)/i.match(line)
-					if (Integer($3) > 0 && Integer($3) < 1001 && Integer($4) > 0 && Integer($4) < 1001)
-						Logger.log "RECV - " + line
-						total = 0
-						for i in 1..Integer($3)
-							total = total + Random.new.rand(1..Integer($4))
-						end
-						if(!$5.empty?)
-							total = total + (Integer($5)*Integer($3))
-						end
+			elsif /:(.*)!.* PRIVMSG (.*) :;Roll(Each)? (\d+)d(\d+) ?\+? ?(\d*)/i.match(line)
+				if (Integer($4) > 0 && Integer($4) < 1001 && Integer($5) > 0 && Integer($5) < 1001)
+					Logger.log "RECV - " + line
+					total = 0
+					rolls = []
+					Integer($4).times do
+						total = total + dieRoll($5, $6)
+						rolls << dieRoll($5, $6)
+					end
+					if $3.nil?
 						iBot.say($2, "#{$1} rolled: #{total}")
 					else
-						iBot.say($2, "#{1.chr}ACTION Slaps #{$1}#{1.chr}")
+						iBot.say($2, "#{$1} rolled: #{rolls}")
 					end
+				else
+					iBot.say($2, "#{1.chr}ACTION Slaps #{$1}#{1.chr}")
+				end
 			
 			#####Administrative Commands#####
 			
@@ -60,5 +63,13 @@ class Functions
 		Logger.log e.message
 		Logger.log e.backtrace.inspect
 		end
+	end
+	
+	def dieRoll(sides, mod)
+		total = Random.new.rand(1..Integer(sides))
+		if(!mod.empty?)
+			total = total + Integer(mod)
+		end
+		return total
 	end
 end
