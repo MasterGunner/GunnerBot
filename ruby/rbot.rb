@@ -17,7 +17,7 @@ CHAN = "#desertbus"
 def botRead
 	Logger.log("In Thread")
 	while (line = @iBot.gets)
-		if /Gunner/i.match(line) || /(^| )MG($| )/i.match(line)
+		if / :.*Gunner/i.match(line) || /(^| )MG($| )/i.match(line)
 			Logger.log "RECV - " + line
 		end
 		Thread.new{Functions.listeners(@iBot, line)}
@@ -38,6 +38,9 @@ def botWrite
 		end
 	end
 end
+
+#Load lists from files
+Functions.readList
 
 #Connect to IRC
 @iBot = IRC.new(SERVER, PORT, NICK, CHAN)
