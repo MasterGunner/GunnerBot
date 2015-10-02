@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "commonjs",
+        "sourceMap": true,
+		"out":"bin/GunnerBot.js",
+        "removeComments": true,
+        "declaration": true
+    }
+}

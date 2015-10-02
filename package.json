@@ -1,0 +1,21 @@
+{
+  "name": "GunnerBot",
+  "version": "0.2.0",
+  "description": "Gunner's Obligitory Chatbot.",
+  "main": "bin/GunnerBot.js",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-typescript": "^2.9.0",
+    "gulp-uglify": "^1.4.1",
+    "merge2": "^0.3.6",
+    "run-sequence": "^1.1.4",
+    "vinyl-paths": "^1.0.0"
+  },
+  "scripts": {
+    "build": "gulp build"
+  },
+  "author": "Master Gunner"
+}
