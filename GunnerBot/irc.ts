@@ -22,10 +22,21 @@ module GunnerBot {
 				this.socket.setEncoding('ascii');
 				this.socket.setNoDelay();
 				
+				this.startupConfig();
+			}
+			
+			//Initial IRC and Socket listeners.
+			startupConfig(): void {
 				//Register listener for Ping/Pong.
-				this.addListener(/^PING :(.+)$/i, (info) => {
+				this.addListener('PingPong',/^PING :(.+)$/i, (info) => {
 					this.send('PONG :' + info[1]);
-				}, false);
+				});
+				
+				//Register listener for joining designated channel
+				//this.addListener(/:MistressGunner!.* PRIVMSG (.*) :;Join (.*)/i, function(info) {
+				this.addListener('JoinChannel', new RegExp(" PRIVMSG (.*) :"+commandChar+"Join (.*)",'i'), function(info) {
+					irc.send('JOIN ' + info[2]);
+				});
 				
 				//Gets incoming data, separates into lines, logs, and passes to data handler
 				this.socket.on('data', (data) => {
@@ -57,35 +68,39 @@ module GunnerBot {
 					}, 1000);
 					
 					//On disconnect...
-					/*socket.on('disconnect', function() {
-						Utilities.log("Disconnected from" + server + "!");
-					});*/
 				});
 				
 				//Connect to server
 				this.socket.connect(port, server);
 			}
 			
+			//Join an IRC Channel.
 			join(channel:string): void {
 				this.send('JOIN ' + channel);
 				Utilities.log('JOINED CHANNEL -', channel);
 			}
 			
-			//Add listeners for incomming messages.
-			addListener(query: RegExp, callback: any, OnlyExecuteOnce:boolean): void {
-				this.listeners.push([query, callback, OnlyExecuteOnce]);
+			//Add listeners for incoming messages.
+			addListener(name: string, query: RegExp, callback: any): void {
+				this.listeners.push([name, query, callback]);
+			}
+			
+			//Remove listener for incoming messages.
+			removeListener(name: string): void {
+				for (var i = 0; i < this.listeners.length; i++) {
+					if(this.listeners[i][0] === name) { //Find listener with matching name.
+						this.listeners.splice(i, 1); //Remove listener from list.
+						i--; //Decrease counter to avoid skipping the next listener.
+					}
+				}
 			}
 			
 			handle(message: string): void {
-				var i: number, info: Object;
-				for (i = 0; i < this.listeners.length; i++) { //Iterate through all listeners.
-					info = this.listeners[i][0].exec(message); //Check if the message hits the regex for the listener.
+				//var i: number, info: Object;
+				for (var i = 0; i < this.listeners.length; i++) { //Iterate through all listeners.
+					var info = this.listeners[i][1].exec(message); //Check if the message hits the regex for the listener.
 					if (info) { //If it matches, call the function associated with the listener.
-						this.listeners[i][1](info); //Pass into the listener function the results of the regex matching.
-						if (this.listeners[i][2]) {	//If "OnlyExecuteOnce" is TRUE, remove from list of listeners.
-							this.listeners.splice(i, 1);
-							i--; //Decrease counter to avoid skipping the next listener.
-						}
+						this.listeners[i][2](info); //Pass into the listener function the results of the regex matching.
 					}
 				}
 			}
