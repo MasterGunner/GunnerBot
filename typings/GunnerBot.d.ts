@@ -1,7 +1,38 @@
 /// <reference path="../typings/tsd.d.ts" />
-declare var commandChar: string;
+declare module GunnerBot {
+    module Functions.Modules.DBStats {
+        function run(commandChar: any): void;
+    }
+}
+declare module GunnerBot {
+    module Functions.Modules.DBX {
+        function run(commandChar: any): void;
+    }
+}
+declare module GunnerBot {
+    module Functions.Modules.Help {
+        function run(commandChar: any): void;
+    }
+}
+declare module GunnerBot {
+    module Functions.Modules.Responses {
+        function run(commandChar: any): void;
+    }
+}
+declare module GunnerBot {
+    module Functions.Modules.Roll {
+        function run(commandChar: any): void;
+    }
+}
+declare module GunnerBot {
+    module Functions {
+        function RegisterListeners(): void;
+    }
+}
+declare var fs: any;
 declare module GunnerBot {
     module Utilities {
+        var logFile: string;
         function log(...message: any[]): void;
     }
 }
@@ -13,9 +44,10 @@ declare module GunnerBot {
             listeners: Array<any>;
             constructor();
             startupConfig(): void;
-            connect(server: string, port: number, channel: string, nick: string): void;
+            connect(server: string, port: number, channels: string[], nick: string): void;
             join(channel: string): void;
-            addListener(name: string, query: RegExp, callback: any): void;
+            leave(channel: string): void;
+            addListener(name: string, query: RegExp, callback: any, helpText?: string): void;
             removeListener(name: string): void;
             handle(message: string): void;
             send(message: string): void;
@@ -26,9 +58,6 @@ declare module GunnerBot {
 declare var utilities: typeof GunnerBot.Utilities;
 declare var ircModule: typeof GunnerBot.IRC;
 declare var irc: GunnerBot.IRC.IRC;
-declare var MarkovChain: any;
-declare var fs: any;
-declare var DBRecords: any;
 declare var args: string[];
 declare var server: string;
-declare var channel: string;
+declare var channels: string[];

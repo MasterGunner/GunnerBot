@@ -1,9 +1,14 @@
 /// <reference path="../typings/tsd.d.ts" />
+var fs = require('fs');
 module GunnerBot {
 	export module Utilities {
+        export var logFile = "Unknown.log";
 		//Logging
 		export function log (...message: any[]): void {
-			console.log(message.join(" "));
+            var line = (new Date()).toISOString() + ": " + message.join(" ");
+			console.log(line);
+            
+			fs.appendFile(logFile, line, function(err) { if (err) throw err; }); 
 		}
 	}
 }

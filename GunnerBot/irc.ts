@@ -28,16 +28,10 @@ module GunnerBot {
 			//Initial IRC and Socket listeners.
 			startupConfig(): void {
 				//Register listener for Ping/Pong.
-				this.addListener('PingPong',/^PING :(.+)$/i, (info) => {
-					this.send('PONG :' + info[1]);
+				this.addListener('PingPong',/^PING (.+)$/i, (info) => {
+					this.send('PONG ' + info[1]);
 				});
-				
-				//Register listener for joining designated channel
-				//this.addListener(/:MistressGunner!.* PRIVMSG (.*) :;Join (.*)/i, function(info) {
-				this.addListener('JoinChannel', new RegExp(" PRIVMSG (.*) :"+commandChar+"Join (.*)",'i'), function(info) {
-					irc.send('JOIN ' + info[2]);
-				});
-				
+                
 				//Gets incoming data, separates into lines, logs, and passes to data handler
 				this.socket.on('data', (data) => {
 					data = data.split('\r\n');
@@ -51,7 +45,7 @@ module GunnerBot {
 			}
 			
 			//Connect to an IRC server.
-			connect(server: string, port: number, channel:string, nick:string): void {
+			connect(server: string, port: number, channels:string[], nick:string): void {
 				//Set socket listeners for connect and disconnect.
 				this.socket.on('connect', () => {
 					Utilities.log('Established connection, registering and shit...');
@@ -60,14 +54,24 @@ module GunnerBot {
 					setTimeout(() => {
 						this.send('NICK ' + nick);
 						this.send('USER ' + nick + ' 8 *:Node.js IRC bot');
-						if(channel) { //If channel is specified, join it after 3 seconds.
-							setTimeout(() => {
-								this.join(channel);
-							}, 3000);
-						}
+
+                        if(channels) { //If channels are specified, join them after 3 seconds.
+                            setTimeout(() => {
+                                channels.forEach((channel) => {
+                                    this.join(channel);
+                                })
+                            }, 3000)
+                        }
+                        
 					}, 1000);
 					
 					//On disconnect...
+                    this.addListener('OnDisconnect', /^ERROR :Closing Link:/i, (info) => {
+                        this.removeListener('OnDisconnect');
+                        setTimeout(() => {
+                            this.connect(server, port, channels, nick);
+                        });
+                    });
 				});
 				
 				//Connect to server
@@ -79,10 +83,16 @@ module GunnerBot {
 				this.send('JOIN ' + channel);
 				Utilities.log('JOINED CHANNEL -', channel);
 			}
+            
+            //Leave an IRC  Channel
+            leave(channel:string): void {
+                this.send('PART ' + channel);
+                Utilities.log('LEFT CHANNEL - ', channel);
+            }
 			
 			//Add listeners for incoming messages.
-			addListener(name: string, query: RegExp, callback: any): void {
-				this.listeners.push([name, query, callback]);
+			addListener(name: string, query: RegExp, callback: any, helpText?:string): void {
+				this.listeners.push([name, query, callback, (helpText ? helpText:"")]);
 			}
 			
 			//Remove listener for incoming messages.

@@ -36,4 +36,5 @@ gulp.task('minify', function () {
 var runSequence = require('run-sequence');
 gulp.task('build', function () {
     runSequence('build-GBot', 'build-clean', 'minify');
+    //runSequence('build-GBot', 'build-clean');
 });
