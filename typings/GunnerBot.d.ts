@@ -1,11 +1,13 @@
 /// <reference path="../typings/tsd.d.ts" />
+declare var fs: any;
 declare module GunnerBot {
-    module Functions.Modules.DBStats {
-        function run(commandChar: any): void;
+    module Utilities {
+        var logFile: string;
+        function log(...message: any[]): void;
     }
 }
 declare module GunnerBot {
-    module Functions.Modules.DBX {
+    module Functions.Modules.DBStats {
         function run(commandChar: any): void;
     }
 }
@@ -25,15 +27,13 @@ declare module GunnerBot {
     }
 }
 declare module GunnerBot {
-    module Functions {
-        function RegisterListeners(): void;
+    module Functions.Modules.Emojifi {
+        function run(commandChar: any): void;
     }
 }
-declare var fs: any;
 declare module GunnerBot {
-    module Utilities {
-        var logFile: string;
-        function log(...message: any[]): void;
+    module Functions {
+        function RegisterListeners(): void;
     }
 }
 declare var net: any;

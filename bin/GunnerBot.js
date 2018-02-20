@@ -1,1 +1,294 @@
-var GunnerBot;!function(n){var e;!function(n){var e;!function(n){var e;!function(n){function e(n){irc.addListener("DBStats",new RegExp(" PRIVMSG (.*) :"+n+"DBStats ?$","i"),function(n){t(n)})}function t(n){}n.run=e}(e=n.DBStats||(n.DBStats={}))}(e=n.Modules||(n.Modules={}))}(e=n.Functions||(n.Functions={}))}(GunnerBot||(GunnerBot={}));var GunnerBot;!function(n){var e;!function(n){var e;!function(n){var e;!function(n){function e(n){irc.addListener("DBX",new RegExp(" PRIVMSG (.*) :"+n+"DBX ?$","i"),function(n){t(n)},"Generate a predicted Desert Bus event. Usage: "+n+"DBX")}function t(n){var e=Math.floor(160*Math.random())+":"+("0"+Math.floor(60*Math.random())).slice(-2)+" - ";e+=1==Math.floor(100*Math.random())?"Johnny's shift ends, Johnny's shift begins.":r.start(function(n){var e=Object.keys(n);return e[~~(Math.random()*e.length)]}).end().process(),irc.say(n[1],e)}var i=require("markovchain"),o=require("fs"),r=new i(o.readFileSync("./DBRecords.txt"));n.run=e}(e=n.DBX||(n.DBX={}))}(e=n.Modules||(n.Modules={}))}(e=n.Functions||(n.Functions={}))}(GunnerBot||(GunnerBot={}));var GunnerBot;!function(n){var e;!function(n){var e;!function(n){var e;!function(n){function e(n){irc.addListener("Functions",new RegExp(" PRIVMSG (.*) :"+n+"(Functions|Modules|Commands) ?$","i"),function(n){var e=irc.listeners.map(function(n){return n[0]}),t=["PingPong","OnDisconnect"];e=e.filter(function(n){return t.indexOf(n)<0}),irc.say(n[1],"Available Commands Are: "+e.join(", "))}),irc.addListener("Help",new RegExp(" PRIVMSG (.*) :"+n+"Help (.*)$","i"),function(n){var e=irc.listeners.map(function(n){return n[0].toLowerCase()}),t=irc.listeners[e.indexOf(n[2].toLowerCase())];void 0!==t?irc.say(n[1],t[3]):irc.say(n[1],"No help message found for provided command.")},"...")}n.run=e}(e=n.Help||(n.Help={}))}(e=n.Modules||(n.Modules={}))}(e=n.Functions||(n.Functions={}))}(GunnerBot||(GunnerBot={}));var GunnerBot;!function(n){var e;!function(n){var e;!function(n){var e;!function(n){function e(n){irc.addListener("Responses",new RegExp(":(.*)!.* PRIVMSG (.*) :([^s]+) ?$","i"),function(n){switch(n[3].toLowerCase()){case"Marp":t(n[2],n[1])}})}function t(n,e){var t=Math.floor(20*Math.random())+1;switch(!0){case 1==t:irc.say(n,e+" HAS TINNITUS!");break;case 10>t:irc.say(n,e+" /might/ have tinnitus.");break;default:irc.say(n,e+" does NOT have tinnitus.")}}n.run=e}(e=n.Responses||(n.Responses={}))}(e=n.Modules||(n.Modules={}))}(e=n.Functions||(n.Functions={}))}(GunnerBot||(GunnerBot={}));var GunnerBot;!function(n){var e;!function(e){var t;!function(e){var t;!function(e){function t(n){irc.addListener("Roll",new RegExp(":(.*)!.* PRIVMSG (.*) :"+n+"Roll (\\d+)d(\\d+)\\s*\\+?\\s*(\\d*)","i"),function(n){i(n)},"Roll some die. Usage: "+n+"Roll xdy + z")}function i(e){n.Utilities.log("Entered Roller");var t=0;if(e[3]>100||e[4]>100)t=(e[4]/2+.5)*e[3];else for(var i=0;i<e[3];i++)t=t+Math.floor(Math.random()*e[4])+1;e[5]&&(t+=e[5]),irc.say(e[2],""+e[1]+" rolled: "+t)}e.run=t}(t=e.Roll||(e.Roll={}))}(t=e.Modules||(e.Modules={}))}(e=n.Functions||(n.Functions={}))}(GunnerBot||(GunnerBot={}));var GunnerBot;!function(n){var e;!function(e){function t(){irc.addListener("JoinChannel",new RegExp(" PRIVMSG (.*) :"+o+"Join (.*)","i"),function(n){irc.join(n[2])},"Make GunnerBot join a new channel. Usage: "+o+"Join #Channel"),irc.addListener("LeaveChannel",new RegExp(" PRIVMSG (.*) :"+o+"Leave ?$","i"),function(n){irc.leave(n[1])},"Make GunnerBot leave the channel. Usage: "+o+"Leave"),irc.addListener("Echo",new RegExp(" PRIVMSG (.*) :"+o+"Echo (.*)","i"),function(n){irc.say(n[1],n[2])},"Echo the provided text. Usage: "+o+"Echo DerpDerpDerp"),irc.addListener("LeaveChannel",new RegExp(" PRIVMSG (.*) :"+o+"Source ?$","i"),function(n){irc.say(n[1],"Don't judge me! https://github.com/MasterGunner/GunnerBot.git")}),i.Help.run(o),i.Responses.run(o),i.DBX.run(o),i.Roll.run(o)}var i=n.Functions.Modules,o=";";e.RegisterListeners=t}(e=n.Functions||(n.Functions={}))}(GunnerBot||(GunnerBot={}));var fs=require("fs"),GunnerBot;!function(n){var e;!function(n){function e(){for(var e=[],t=0;t<arguments.length;t++)e[t-0]=arguments[t];var i=(new Date).toISOString()+": "+e.join(" ");console.log(i),fs.appendFile(n.logFile,i,function(n){if(n)throw n})}n.logFile="Unknown.log",n.log=e}(e=n.Utilities||(n.Utilities={}))}(GunnerBot||(GunnerBot={}));var net=require("net"),GunnerBot;!function(n){var e;!function(e){var t=function(){function e(){this.socket=new net.Socket,this.listeners=[],this.socket.setEncoding("ascii"),this.socket.setNoDelay(),this.startupConfig()}return e.prototype.startupConfig=function(){var e=this;this.addListener("PingPong",/^PING (.+)$/i,function(n){e.send("PONG "+n[1])}),this.socket.on("data",function(t){t=t.split("\r\n"),t.forEach(function(t){n.Utilities.log("RECV -",t),""!==t&&e.handle(t)})})},e.prototype.connect=function(e,t,i,o){var r=this;this.socket.on("connect",function(){n.Utilities.log("Established connection, registering and shit..."),setTimeout(function(){r.send("NICK "+o),r.send("USER "+o+" 8 *:Node.js IRC bot"),i&&setTimeout(function(){i.forEach(function(n){r.join(n)})},3e3)},1e3),r.addListener("OnDisconnect",/^ERROR :Closing Link:/i,function(n){r.removeListener("OnDisconnect"),setTimeout(function(){r.connect(e,t,i,o)})})}),this.socket.connect(t,e)},e.prototype.join=function(e){this.send("JOIN "+e),n.Utilities.log("JOINED CHANNEL -",e)},e.prototype.leave=function(e){this.send("PART "+e),n.Utilities.log("LEFT CHANNEL - ",e)},e.prototype.addListener=function(n,e,t,i){this.listeners.push([n,e,t,i?i:""])},e.prototype.removeListener=function(n){for(var e=0;e<this.listeners.length;e++)this.listeners[e][0]===n&&(this.listeners.splice(e,1),e--)},e.prototype.handle=function(n){for(var e=0;e<this.listeners.length;e++){var t=this.listeners[e][1].exec(n);t&&this.listeners[e][2](t)}},e.prototype.send=function(e){this.socket.write(e+"\r\n","ascii",function(){n.Utilities.log("SENT -",e)})},e.prototype.say=function(n,e){0==e.indexOf("ACTION ")&&(e=String.fromCharCode(1)+e+String.fromCharCode(1)),this.socket.write("PRIVMSG "+n+" :"+e+"\r\n","ascii",function(){console.log("SAID ("+n+") -",e)})},e}();e.IRC=t}(e=n.IRC||(n.IRC={}))}(GunnerBot||(GunnerBot={}));var utilities=GunnerBot.Utilities,ircModule=GunnerBot.IRC,irc=new ircModule.IRC,args=process.argv.slice(2),server=args.shift(),channels=args;utilities.logFile=server+".log",GunnerBot.Functions.RegisterListeners(),irc.connect(server,6667,channels,"GunnerBot"),setTimeout(function(){args.forEach(function(n){irc.join(n)})},5e3);
+var fs = require('fs');
+var GunnerBot;
+(function (GunnerBot) {
+    var Utilities;
+    (function (Utilities) {
+        Utilities.logFile = "Unknown.log";
+        function log(...message) {
+            var line = (new Date()).toISOString() + ": " + message.join(" ");
+            console.log(line);
+            fs.appendFile(Utilities.logFile, line + "\n", function (err) { if (err)
+                throw err; });
+        }
+        Utilities.log = log;
+    })(Utilities = GunnerBot.Utilities || (GunnerBot.Utilities = {}));
+})(GunnerBot || (GunnerBot = {}));
+var GunnerBot;
+(function (GunnerBot) {
+    var Functions;
+    (function (Functions) {
+        var Modules;
+        (function (Modules) {
+            var DBStats;
+            (function (DBStats_1) {
+                function run(commandChar) {
+                    irc.addListener('DBStats', new RegExp(" PRIVMSG (.*) :" + commandChar + "DBStats ?$", 'i'), function (info) {
+                        DBStats(info);
+                    });
+                }
+                DBStats_1.run = run;
+                function DBStats(info) {
+                    return;
+                }
+            })(DBStats = Modules.DBStats || (Modules.DBStats = {}));
+        })(Modules = Functions.Modules || (Functions.Modules = {}));
+    })(Functions = GunnerBot.Functions || (GunnerBot.Functions = {}));
+})(GunnerBot || (GunnerBot = {}));
+var GunnerBot;
+(function (GunnerBot) {
+    var Functions;
+    (function (Functions) {
+        var Modules;
+        (function (Modules) {
+            var Help;
+            (function (Help) {
+                function run(commandChar) {
+                    irc.addListener('Functions', new RegExp(" PRIVMSG (.*) :" + commandChar + "(Functions|Modules|Commands) ?$", 'i'), function (info) {
+                        var commands = irc.listeners.map(x => x[0]);
+                        var hiddenCommands = ['PingPong', 'OnDisconnect'];
+                        commands = commands.filter(function (x) { return hiddenCommands.indexOf(x) < 0; });
+                        irc.say(info[1], 'Available Commands Are: ' + commands.join(', '));
+                    });
+                    irc.addListener('Help', new RegExp(" PRIVMSG (.*) :" + commandChar + "Help (.*)$", 'i'), function (info) {
+                        var commands = irc.listeners.map(x => x[0].toLowerCase());
+                        var command = irc.listeners[commands.indexOf(info[2].toLowerCase())];
+                        if (command !== undefined) {
+                            irc.say(info[1], command[3]);
+                        }
+                        else {
+                            irc.say(info[1], "No help message found for provided command.");
+                        }
+                    }, "...");
+                }
+                Help.run = run;
+            })(Help = Modules.Help || (Modules.Help = {}));
+        })(Modules = Functions.Modules || (Functions.Modules = {}));
+    })(Functions = GunnerBot.Functions || (GunnerBot.Functions = {}));
+})(GunnerBot || (GunnerBot = {}));
+var GunnerBot;
+(function (GunnerBot) {
+    var Functions;
+    (function (Functions) {
+        var Modules;
+        (function (Modules) {
+            var Responses;
+            (function (Responses) {
+                function run(commandChar) {
+                    irc.addListener('Responses', new RegExp(":(.*)!.* PRIVMSG (.*) :([^\s]+) ?$", 'i'), function (info) {
+                        switch (info[3].toLowerCase()) {
+                            case "Marp":
+                                Marp(info[2], info[1]);
+                                break;
+                        }
+                    });
+                }
+                Responses.run = run;
+                function Marp(channel, user) {
+                    var result = Math.floor(Math.random() * 20) + 1;
+                    switch (true) {
+                        case (result == 1):
+                            irc.say(channel, user + " HAS TINNITUS!");
+                            break;
+                        case (result < 10):
+                            irc.say(channel, user + " /might/ have tinnitus.");
+                            break;
+                        default:
+                            irc.say(channel, user + " does NOT have tinnitus.");
+                    }
+                }
+            })(Responses = Modules.Responses || (Modules.Responses = {}));
+        })(Modules = Functions.Modules || (Functions.Modules = {}));
+    })(Functions = GunnerBot.Functions || (GunnerBot.Functions = {}));
+})(GunnerBot || (GunnerBot = {}));
+var GunnerBot;
+(function (GunnerBot) {
+    var Functions;
+    (function (Functions) {
+        var Modules;
+        (function (Modules) {
+            var Roll;
+            (function (Roll_1) {
+                function run(commandChar) {
+                    irc.addListener('Roll', new RegExp(":(.*)!.* PRIVMSG (.*) :" + commandChar + "Roll (\\d+)d(\\d+)\\s*\\+?\\s*(\\d*)", 'i'), function (info) {
+                        Roll(info);
+                    }, "Roll some die. Usage: " + commandChar + "Roll xdy + z");
+                }
+                Roll_1.run = run;
+                function Roll(info) {
+                    GunnerBot.Utilities.log('Entered Roller');
+                    var total = 0;
+                    if (info[3] > 100 || info[4] > 100) {
+                        total = (info[4] / 2 + 0.5) * info[3];
+                    }
+                    else {
+                        for (var i = 0; i < info[3]; i++) {
+                            total = total + Math.floor(Math.random() * info[4]) + 1;
+                        }
+                    }
+                    if (info[5]) {
+                        total = total + info[5];
+                    }
+                    irc.say(info[2], '' + info[1] + ' rolled: ' + total);
+                }
+            })(Roll = Modules.Roll || (Modules.Roll = {}));
+        })(Modules = Functions.Modules || (Functions.Modules = {}));
+    })(Functions = GunnerBot.Functions || (GunnerBot.Functions = {}));
+})(GunnerBot || (GunnerBot = {}));
+var GunnerBot;
+(function (GunnerBot) {
+    var Functions;
+    (function (Functions) {
+        var Modules;
+        (function (Modules) {
+            var Emojifi;
+            (function (Emojifi_1) {
+                var translate = require('moji-translate');
+                function run(commandChar) {
+                    irc.addListener('DBStats', new RegExp(" PRIVMSG (.*) :" + commandChar + "Emojif(?:i|y) (.*) ?$", 'i'), function (info) {
+                        Emojifi(info);
+                    });
+                }
+                Emojifi_1.run = run;
+                function Emojifi(info) {
+                    var emojifiedResponse = translate.translate(info[2], false);
+                    irc.say(info[1], emojifiedResponse);
+                }
+            })(Emojifi = Modules.Emojifi || (Modules.Emojifi = {}));
+        })(Modules = Functions.Modules || (Functions.Modules = {}));
+    })(Functions = GunnerBot.Functions || (GunnerBot.Functions = {}));
+})(GunnerBot || (GunnerBot = {}));
+var GunnerBot;
+(function (GunnerBot) {
+    var Functions;
+    (function (Functions) {
+        var modules = GunnerBot.Functions.Modules;
+        var commandChar = ';';
+        function RegisterListeners() {
+            irc.addListener('JoinChannel', new RegExp(" PRIVMSG (.*) :" + commandChar + "Join (.*)", 'i'), function (info) {
+                irc.join(info[2]);
+            }, "Make GunnerBot join a new channel. Usage: " + commandChar + "Join #Channel");
+            irc.addListener('LeaveChannel', new RegExp(" PRIVMSG (.*) :" + commandChar + "Leave ?$", 'i'), function (info) {
+                irc.leave(info[1]);
+            }, "Make GunnerBot leave the channel. Usage: " + commandChar + "Leave");
+            irc.addListener('Echo', new RegExp(" PRIVMSG (.*) :" + commandChar + "Echo (.*)", 'i'), function (info) {
+                irc.say(info[1], info[2]);
+            }, "Echo the provided text. Usage: " + commandChar + "Echo DerpDerpDerp");
+            irc.addListener('Source', new RegExp(" PRIVMSG (.*) :" + commandChar + "Source ?$", 'i'), function (info) {
+                irc.say(info[1], "Don't judge me! https://github.com/MasterGunner/GunnerBot.git");
+            });
+            modules.Help.run(commandChar);
+            modules.Responses.run(commandChar);
+            modules.Roll.run(commandChar);
+            modules.Emojifi.run(commandChar);
+        }
+        Functions.RegisterListeners = RegisterListeners;
+    })(Functions = GunnerBot.Functions || (GunnerBot.Functions = {}));
+})(GunnerBot || (GunnerBot = {}));
+var net = require('net');
+var GunnerBot;
+(function (GunnerBot) {
+    var IRC;
+    (function (IRC_1) {
+        class IRC {
+            constructor() {
+                this.socket = new net.Socket();
+                this.listeners = [];
+                this.socket.setEncoding('ascii');
+                this.socket.setNoDelay();
+                this.startupConfig();
+            }
+            startupConfig() {
+                this.addListener('PingPong', /^PING (.+)$/i, (info) => {
+                    this.send('PONG ' + info[1]);
+                });
+                this.socket.on('data', (data) => {
+                    data = data.split('\r\n');
+                    data.forEach((message) => {
+                        GunnerBot.Utilities.log('RECV -', message);
+                        if (message !== '') {
+                            this.handle(message);
+                        }
+                    });
+                });
+            }
+            connect(server, port, channels, nick) {
+                this.socket.on('connect', () => {
+                    GunnerBot.Utilities.log('Established connection, registering and shit...');
+                    setTimeout(() => {
+                        this.send('NICK ' + nick);
+                        this.send('USER ' + nick + ' 8 *:Node.js IRC bot');
+                        if (channels) {
+                            setTimeout(() => {
+                                channels.forEach((channel) => {
+                                    this.join(channel);
+                                });
+                            }, 3000);
+                        }
+                    }, 1000);
+                    this.addListener('OnDisconnect', /^ERROR :Closing Link:/i, (info) => {
+                        this.removeListener('OnDisconnect');
+                        setTimeout(() => {
+                            this.connect(server, port, channels, nick);
+                        });
+                    });
+                });
+                this.socket.connect(port, server);
+            }
+            join(channel) {
+                this.send('JOIN ' + channel);
+                GunnerBot.Utilities.log('JOINED CHANNEL -', channel);
+            }
+            leave(channel) {
+                this.send('PART ' + channel);
+                GunnerBot.Utilities.log('LEFT CHANNEL - ', channel);
+            }
+            addListener(name, query, callback, helpText) {
+                this.listeners.push([name, query, callback, (helpText ? helpText : "")]);
+            }
+            removeListener(name) {
+                for (var i = 0; i < this.listeners.length; i++) {
+                    if (this.listeners[i][0] === name) {
+                        this.listeners.splice(i, 1);
+                        i--;
+                    }
+                }
+            }
+            handle(message) {
+                for (var i = 0; i < this.listeners.length; i++) {
+                    var info = this.listeners[i][1].exec(message);
+                    if (info) {
+                        this.listeners[i][2](info);
+                    }
+                }
+            }
+            send(message) {
+                this.socket.write(message + '\r\n', 'ascii', () => {
+                    GunnerBot.Utilities.log('SENT -', message);
+                });
+            }
+            say(channel, message) {
+                if (message.indexOf('ACTION ') == 0) {
+                    message = String.fromCharCode(1) + message + String.fromCharCode(1);
+                }
+                this.socket.write('PRIVMSG ' + channel + ' :' + message + '\r\n', 'UTF8', () => {
+                    GunnerBot.Utilities.log('SAID (' + channel + ') -', message);
+                });
+            }
+        }
+        IRC_1.IRC = IRC;
+    })(IRC = GunnerBot.IRC || (GunnerBot.IRC = {}));
+})(GunnerBot || (GunnerBot = {}));
+var utilities = GunnerBot.Utilities;
+var ircModule = GunnerBot.IRC;
+var irc = new ircModule.IRC();
+var args = process.argv.slice(2);
+var server = args.shift();
+var channels = args;
+utilities.logFile = server + ".log";
+GunnerBot.Functions.RegisterListeners();
+irc.connect(server, 6667, channels, 'GunnerBot');
+setTimeout(function () {
+    args.forEach(function (val) {
+        irc.join(val);
+    });
+}, 5000);

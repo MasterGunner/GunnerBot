@@ -3,7 +3,7 @@
 //
 
 /// <reference path="../typings/tsd.d.ts" />
-/// <reference path="Utilities.ts" />
+/// <reference path="utilities.ts" />
 
 var net = require('net');
 
@@ -127,8 +127,8 @@ module GunnerBot {
 				if (message.indexOf('ACTION ') == 0) {
 					message = String.fromCharCode(1) + message + String.fromCharCode(1);
 				}
-				this.socket.write('PRIVMSG ' + channel + ' :' + message + '\r\n', 'ascii', () => {
-					console.log('SAID (' + channel + ') -', message);
+				this.socket.write('PRIVMSG ' + channel + ' :' + message + '\r\n', 'UTF8', () => {
+					Utilities.log('SAID (' + channel + ') -', message);
 				});
 			}
 		}

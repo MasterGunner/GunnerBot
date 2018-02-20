@@ -5,8 +5,7 @@
   "main": "bin/GunnerBot.js",
   "private": true,
   "dependencies": {
-    "markovchain": "^1.0.2",
-    "moji-translate": "^1.0.8"
+    "markovchain": "^1.0.2"
   },
   "devDependencies": {
     "del": "^1.2.1",

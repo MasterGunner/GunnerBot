@@ -1,5 +1,6 @@
 /// <reference path="../typings/tsd.d.ts" />
-/// <reference path="Utilities.ts" />
+/// <reference path="utilities.ts" />
+/// <reference path="functions.ts" />
 /// <reference path="irc.ts" />
 
 var utilities = GunnerBot.Utilities
@@ -16,7 +17,7 @@ utilities.logFile = server + ".log";
 
 GunnerBot.Functions.RegisterListeners();
 
-//irc.connect('irc.dbcommunity.org', 6667, '#desertbus', 'GunnerBot');
+//irc.connect('irc.dbcommunity.org', 6667, ['#desertbus'], 'GunnerBot');
 irc.connect(server, 6667, channels, 'GunnerBot');
 
 setTimeout(function() {

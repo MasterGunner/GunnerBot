@@ -8,7 +8,7 @@ module GunnerBot {
             var line = (new Date()).toISOString() + ": " + message.join(" ");
 			console.log(line);
             
-			fs.appendFile(logFile, line, function(err) { if (err) throw err; }); 
+			fs.appendFile(logFile, line+"\n", function(err) { if (err) throw err; }); 
 		}
 	}
 }

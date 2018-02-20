@@ -30,8 +30,8 @@ module GunnerBot {
                 irc.say(info[1], info[2]);
             }, "Echo the provided text. Usage: "+commandChar+"Echo DerpDerpDerp");
             
-            //Leave designated channel
-            irc.addListener('LeaveChannel', new RegExp(" PRIVMSG (.*) :"+commandChar+"Source ?$",'i'), function(info) {
+            //Bot Source
+            irc.addListener('Source', new RegExp(" PRIVMSG (.*) :"+commandChar+"Source ?$",'i'), function(info) {
                 irc.say(info[1], "Don't judge me! https://github.com/MasterGunner/GunnerBot.git");
             });
             
@@ -46,10 +46,13 @@ module GunnerBot {
             modules.Responses.run(commandChar);
             
             //Create a Markov-Chained Desert Bus log.
-            modules.DBX.run(commandChar);
+            // modules.DBX.run(commandChar);
             
             //Roll command.
             modules.Roll.run(commandChar);
+
+            //Emojifi command.
+            modules.Emojifi.run(commandChar);
             
         }
     }
